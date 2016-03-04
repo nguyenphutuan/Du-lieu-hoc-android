@@ -1,0 +1,40 @@
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+
+    private GoogleMap mMap;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_maps);
+
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+
+	mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {//ham su kien khi ta bam vao dia diem.
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                Toast.makeText(MainActivity.this,"hello",Toast.LENGTH_SHORT).show();
+
+                return false;
+            }
+        });
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+        LatLng sydney = new LatLng(-34, 151);//vi tri cua cua hang
+        //LatLng sydney2 = new LatLng(-37, 160);
+        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);//ki?u xem map bình thu?ng
+       // mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);//Hybrid
+       // mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);//truy?n hình v? tinh
+        //mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);//b?n d? d?a hình
+        mMap.addMarker(new MarkerOptions().position(sydney).title("Lê H?ng Phong"));
+        //mMap.addMarker(new MarkerOptions().position(sydney2).title("Marker in Saigon"));
+       // mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));// zoom o muc binh thuong
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,15));// zoom maps len 15 lan.
+        mMap.addCircle(new CircleOptions().center(sydney).radius(1).fillColor(0x33FF66));
+        //Phuong pháp addCircle() tren la thêm m?t vòng tròn d? b?n d?,fillColor(0xffff0000)tr? v? màu bên trong vòng tròn,radius(1) tr? v? d? r?ng c?a khung tròn.
+    }
+
+}

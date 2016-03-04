@@ -1,0 +1,67 @@
+import android.util.Log;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+
+import java.io.IOException;
+import java.io.StringReader;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+/**
+ * Created by nguye on 12/31/2015.
+ */
+public class XMLDOMParser {
+    public Document getDocument(String xml)
+    { //hàm này l?y 1 string xml ta encode nó thành document ch?a các ph?n t? node
+        Document document = null;
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        try{
+            DocumentBuilder db = factory.newDocumentBuilder();
+            InputSource is = new InputSource();
+            is.setCharacterStream(new StringReader(xml));
+            is.setEncoding("UTF-8");
+            document = db.parse(is);
+        }catch(ParserConfigurationException e)
+        {
+            Log.e("Error: ", e.getMessage(), e);
+            return null;
+        }
+        catch (SAXException e) {
+            Log.e("Error: ", e.getMessage(), e);
+            return null;
+        }
+        catch(IOException e){
+            Log.e("Error: ", e.getMessage(), e);
+            return null;
+        }
+        return document;
+    }
+    public String getValue(Element item, String name)
+    {
+        //ta g?i 1 ph?n t? c?a xml ví d? name là 1 node ta truy?n cho nó 2 thành ph?n element item
+        //(node ? v? trí th? i ta s? truy?n vào) name là cái node ta ánh x?
+        NodeList nodes = item.getElementsByTagName(name);
+        return this.getTextNodeValue(nodes.item(0));
+    }
+    private final String getTextNodeValue(Node elem) {
+        // hàm này cho phép ta l?y ph?n t? trong cái node.
+        Node child;
+        if( elem != null){
+            if (elem.hasChildNodes()){
+                for( child = elem.getFirstChild(); child != null; child = child.getNextSibling() ){
+                    if( child.getNodeType() == Node.TEXT_NODE  ){
+                        return child.getNodeValue();
+                    }
+                }
+            }
+        }
+        return "";
+    }
+}

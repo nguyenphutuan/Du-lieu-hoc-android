@@ -1,0 +1,48 @@
+loai 1:
+vao drawable tao 1 new drawable resource file.
+va co noi dung nhu ben duoi.sau do ben Button thi chi can  android:background="@drawable/custombutton1"
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+   <item android:state_pressed="false">
+       <shape android:shape="rectangle">
+           <gradient android:startColor="#3dfa4d"
+                    android:centerColor="#3dfa4d"
+                    android:endColor="#3dfa4d"
+                    android:angle="90"/>
+           <corners android:radius="10dp"/>
+           <stroke android:width="2dp"
+               android:color="#3dfa4d"/>
+           <padding android:left="15dp"
+               android:top="2dp"
+               android:right="15dp"
+               android:bottom="2dp"/>
+       </shape>
+   </item>
+
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <gradient android:startColor="#7c8dfc"
+                android:centerColor="#7c8dfc"
+                android:endColor="#7c8dfc"
+                android:angle="90"/>
+            <corners android:radius="10dp"/>
+            <stroke android:width="4dp"
+                android:color="#7c8dfc"/>
+            <padding android:left="15dp"
+                android:top="2dp"
+                android:right="15dp"
+                android:bottom="2dp"/>
+        </shape>
+
+    </item>
+
+</selector>
+loai 2:HInh Anh:
+cung nhu vay nhung thay doi noi dung:
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="false">
+        <bitmap android:src="@drawable/phone"/>
+    </item>
+    <item>
+        <bitmap android:src="@drawable/phoneon"/>
+    </item>
+</selector>

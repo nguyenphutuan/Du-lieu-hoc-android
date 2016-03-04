@@ -1,0 +1,20 @@
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder b=new AlertDialog.Builder(this);
+        b.setTitle("exit by button back");
+        b.setMessage("you are sur want exit");
+        b.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+        b.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        b.create.show();
+    }

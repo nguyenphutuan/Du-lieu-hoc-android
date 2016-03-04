@@ -1,0 +1,88 @@
+public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener,TabHost.OnTabChangeListener{
+    ViewPager viewPager;
+    TabHost tabHost;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+
+    initViewPager();
+    initTabHost();
+    }
+
+    private void initTabHost() {
+        tabHost = (TabHost) findViewById(android.R.id.tabhost);
+        tabHost.setup();
+        String[] tabName = {"Tab1", "Tab2", "Tab3"};
+ 	int []mang={R.drawable.aaa,R.drawable.bbbb,R.drawable.ccc,R.drawable.customtabhost};
+        for (int i = 0; i < tabName.length; i++) {
+            TabHost.TabSpec tabSpec;
+            tabSpec = tabHost.newTabSpec(tabName[i]);
+ 		//tabSpec.setIndicator("",getResources().getDrawable(mang[i]));//icon cho tab
+  		//tabHost.getTabWidget().getChildAt(i).setBackgroundColor(Color.parseColor("#4E4E9C"));
+            tabSpec.setIndicator(tabName[i]);
+            tabSpec.setContent(new FakeContent(getApplicationContext()));
+            tabHost.addTab(tabSpec);
+            //tabHost.getTabWidget().getChildTabViewAt(i).setBackgroundDrawable(null);(turn off bar for tabwidget)
+        }
+        tabHost.setOnTabChangedListener(this);
+    }
+
+    public class FakeContent implements TabHost.TabContentFactory{
+    Context context;
+    public FakeContent(Context mcontext) {
+        context = mcontext;
+    }
+    @Override
+    public View createTabContent(String tag) {
+        View fakeview = new View(context);
+        fakeview.setMinimumHeight(0);
+        fakeview.setMinimumWidth(0);
+        return fakeview;
+    }
+    }
+
+    private void initViewPager() {
+        viewPager=(ViewPager)findViewById(R.id.view_pager);
+        List<Fragment> listFragment=new ArrayList<Fragment>();
+        listFragment.add(new Fragment1());
+        listFragment.add(new Fragment2());
+        listFragment.add(new Fragment3());
+        MylistViewpager adapter=new MylistViewpager(getSupportFragmentManager(),listFragment);
+        viewPager.setAdapter(adapter);
+        viewPager.setOnPageChangeListener(this);
+    }
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {//ham su kien cua viewpager
+
+    }
+
+    @Override
+    public void onPageSelected(int selectebItem) {
+        tabHost.setCurrentTab(selectebItem);//khi su kien viewpager say ra thi cai tap host di chuyen theo
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
+    }
+
+    @Override
+    public void onTabChanged(String tabId) {//ham su kien cua tap host
+        int selectebItem=tabHost.getCurrentTab();
+        viewPager.setCurrentItem(selectebItem);//khi su kien tabhost xay ra thi cai viewpager di chuyen theo
+
+    }
+
+}
+
+custom icon cho tabhost:vao drawable tao 1 xml co noi dung ben duoi.
+<selector
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:state_selected="true"
+        android:drawable="@drawable/aaa" />
+    <item
+        android:state_selected="false"
+        android:drawable="@drawable/bbbb" />
+</selector>

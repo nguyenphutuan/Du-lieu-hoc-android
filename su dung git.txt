@@ -1,0 +1,38 @@
+boyhd_depzai_pl@yahoo.com.vn
+toituoiga1993
+
+  Day la cac buoc co ban de them file va push len github: (Bai 1: co ban them 1 file tex)
+$ git clone https://github.com/thachphamblog/hoc-git (dong lenh nay de ket not tren git hub va dong thoi no load 
+ve file android de minh co the su dung)
+$ cd hoc-git(dong lenh nay dung de mo? file co ten la hoc-git ,that ra la ten cua du an android)
+
+$ echo "# Huong dan Git co ban" > README.md
+$ git add README.md (dong nay de tao 1 file co ten README.md va noi dung ben trong cua file do
+file nay se co ngay lap tuc trong file ma ta da clone ve)
+$ git status(cai nay dung de kieu tra xem tinh trang cua file da dc tao chua)(cai nay la kiem tra o trong file minh tai ve bang clone chu chua lien quan den trang github)
+$ git commit -m "First commit on Github" (sau khi them thi ta commit len va ghi chu i cho no vi du nhu First commit on Github hay kieu? 
+nhu :cai nay toi commit ngay hom nay cho de~ hieu)
+
+Tuy nhiên sau khi commit xong, t?p tin dã du?c commit s? v?n không th? xu?t hi?n trong kho ch?a trên Github mà b?n 
+ph?i làm thêm m?t vi?c n?a dó là dùng l?nh git push d? d?y các t?p tin dã du?c commit lên Github.
+ Luu ý r?ng b?n s? c?n nh?p tài kho?n và m?t kh?u Github.
+-> ban ban su dung them lenh nay: 
+ $ git push origin master (origin nghia là tên remote(dich:tu xa) (xem ? bài sau) và master là tên branch)
+hoac don gian :
+ $ git push (the nay no se push het len)
+ $ git push ten-file(chi push file do len)
+
+
+Day la cac buoc co ban de them file va push len github: (Bai 2: co ban2 )
+Còn n?u b?n mu?n xóa nó luôn thì dùng l?nh git rm -f tên_file và nh? c?n th?n khi dùng l?nh này.
+$ pwd (lenh nay dung de kiem tra vi tri git dang dung o file nao)
+$ git commit NGUYENT2.txt -m "this is 2"(neu ta tao file truc tiep ko dung lenh thi ta cu the git add tenfili roi commit len luon)(cach lay ten file nhanh chi can viet chu cai dau roi an tab)
+$ git pull(dung de cap nhat cac thay doi tren git hub)
+-> chu i truoc khi push len thi ta nen pull ve tr cho no dong bo roi ms push:
+
+-> noi tom tat lai khi vao du an: khi thay doi du lieu nhu la them 1 cai button ta dung lenh status de kiem tra ->
+ dung lenh git add + ten file(co mau do tren status) ->git commit -m "loi chu i" -> pull ve de dong bo voi moi nguoi-> git push len git hub
+chu i 2: dung git add * (de them toan bo) ke ca them hay sua xoa ta cung phai add* roi commit 
+chu i 3: su dung commit chi la tram trung chuyen giua file tren may tinh la trang github vi vay sau commit thi ta phai push len
+chu i 4: khi ta tat may di ngu? khi khoi dong lai ta chi can lenh 
+$ cd Desktop/Example111/ la dc 

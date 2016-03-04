@@ -1,0 +1,192 @@
+recyclerview giong nhu list view ta cung phai custom nhu custom listview chi khac 1 chut la co them cardview ho tro o ben customlistview.xml.
+
+main.xml chinh ta su dung recyclerview
+<Button//cai any co cung dc ko co thi thoi.
+        android:layout_width="200dp"
+        android:id="@+id/btn"
+        android:text="btn"
+        android:layout_height="50dp" />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/my_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"/>
+customlistview.xml
+<android.support.v7.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_gravity="center"
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        card_view:cardCornerRadius="2dp"
+        card_view:contentPadding="10dp"
+        android:layout_margin="5dp">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:background="@drawable/custombutton"
+            
+            android:layout_height="fill_parent">
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="100dp"
+                android:background="@drawable/phoneon"
+                android:layout_height="100dp" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="310dp"
+                android:layout_height="fill_parent">
+                <TextView
+                    android:id="@+id/textView"
+                    android:gravity="center"
+                    android:background="#90baf5"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:layout_alignParentTop="true"/>
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:gravity="center"
+                    android:background="#f74e30"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/textView"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+o ben custom Arrayadapter.java///////////////////////////////////////////////////////////////////
+ppublic class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.DataObjectHolder> {
+    private ArrayList<SinhVien> mDataset;
+    private static MyClickListener myClickListener;
+    Activity contect;
+
+    public MyRecyclerViewAdapter(Activity contect,ArrayList<SinhVien> arraylist){
+        this.contect=contect;
+        this.mDataset=arraylist;
+    }
+    public static class DataObjectHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        TextView label;
+        TextView dateTime;
+        ImageView iv;
+
+        public DataObjectHolder(View itemView) {
+            super(itemView);
+            label = (TextView) itemView.findViewById(R.id.textView);///chu y o day
+            dateTime = (TextView) itemView.findViewById(R.id.textView2);///chu y o day
+            iv=(ImageView)itemView.findViewById(R.id.image);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            myClickListener.onItemClick(getAdapterPosition(), v);
+        }
+    }
+
+    public void setOnItemClickListener(MyClickListener myClickListener) {
+        this.myClickListener = myClickListener;
+    }
+
+    public MyRecyclerViewAdapter(ArrayList<SinhVien> myDataset) {
+        mDataset = myDataset;
+    }
+
+    @Override
+    public DataObjectHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_row, parent, false);
+
+        DataObjectHolder dataObjectHolder = new DataObjectHolder(view);
+        return dataObjectHolder;
+    }
+
+    @Override
+    public void onBindViewHolder(DataObjectHolder holder, int position) {
+        holder.label.setText(mDataset.get(position).getTen());         ///chu y o day
+        holder.dateTime.setText(mDataset.get(position).getTuoi());
+        Picasso.with(contect).load(mDataset.get(position).getHinh()).into(holder.iv);
+    }
+
+    public void addItem(SinhVien dataObj) {
+        mDataset.add(dataObj);
+    }
+
+    public void deleteItem(int index) {
+        mDataset.remove(index);
+        notifyItemRemoved(index);
+    }
+
+    @Override
+    public int getItemCount() {
+        return mDataset.size();
+    }
+
+    public interface MyClickListener {
+        public void onItemClick(int position, View v);
+    }
+}
+va cuoi cung ben ham main activity/////////////////////////////////////////////////
+public class MainActivity extends ActionBarActivity {
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+        mRecyclerView.setHasFixedSize(true);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);///////set kieu chi listview nam hay doc
+        mRecyclerView.setLayoutManager(layoutManager);
+        mAdapter = new MyRecyclerViewAdapter(getDataSet());
+
+        //LinearLayoutManager llm = new LinearLayoutManager(this);
+        //mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        //recList.setLayoutManager(llm);
+
+        mRecyclerView.setAdapter(mAdapter);
+
+        // Code to Add an item with default animation
+        //((MyRecyclerViewAdapter) mAdapter).addItem(obj);
+
+        // Code to remove an item with default animation
+        //((MyRecyclerViewAdapter) mAdapter).deleteItem(index);
+
+        Button bt=(Button)findViewById(R.id.btn);
+        bt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MyRecyclerViewAdapter) mAdapter).addItem(new SinhVien("tuan","12","asda"));
+                mAdapter.notifyDataSetChanged();
+            }
+        });
+    }
+    @Override
+    protected void onResume() {//bat tuong tac voi nguoi dung.(ham su kien khi click vao listview)
+        super.onResume();
+        ((MyRecyclerViewAdapter) mAdapter).setOnItemClickListener(new MyRecyclerViewAdapter.MyClickListener() {
+            @Override
+            public void onItemClick(int position, View v) {
+                Toast.makeText(MainActivity.this, " Clicked on Item " + position, Toast.LENGTH_SHORT).show();
+                ((MyRecyclerViewAdapter) mAdapter).deleteItem(position);
+            }
+        });
+    }
+
+    private ArrayList<SinhVien> getDataSet() {
+        ArrayList results = new ArrayList<SinhVien>();
+        for (int index = 0; index < 20; index++) {
+            SinhVien obj = new SinhVien("Some Primary Text " + index,
+                    "Secondary " + index,"asasd");
+            results.add(obj);
+            //
+        }
+        return results;
+    }
+}

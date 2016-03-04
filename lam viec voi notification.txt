@@ -1,0 +1,54 @@
+
+public class MainActivity extends ActionBarActivity {
+    Button btnShow, btnClear;
+    NotificationManager manager;
+    Notification myNotication;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        btnShow = (Button) findViewById(R.id.btnShowNotification);
+        btnClear = (Button) findViewById(R.id.btnClearNotification);
+
+        manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
+        btnShow.setOnClickListener(new View.OnClickListener() {
+            @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+            @Override
+            public void onClick(View arg0) {
+                //API level 11
+                Intent intent = new Intent(MainActivity.this,NotificationView.class);
+
+                PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this, 1, intent, 0);
+
+                Notification.Builder builder = new Notification.Builder(MainActivity.this);
+
+                builder.setAutoCancel(false);
+                builder.setTicker("this is ticker text");
+                builder.setContentTitle("WhatsApp Notification");//day la tieu de
+                builder.setContentText("You have a new message");//day la noi dung thu nhat
+                builder.setSmallIcon(R.drawable.abc);// this is photo.
+                builder.setContentIntent(pendingIntent);
+                builder.setOngoing(true);
+                builder.setSubText("this is subtext");//day la noi dung thu 2
+                builder.setNumber(100);
+                builder.build();
+                myNotication = builder.getNotification();
+                manager.notify(11, myNotication);
+
+            }
+        });
+
+        btnClear.setOnClickListener(new View.OnClickListener() {//xoa thong bao
+
+            @Override
+            public void onClick(View arg0) {
+                manager.cancel(11);
+            }
+        });
+    }
+
+ 
+}

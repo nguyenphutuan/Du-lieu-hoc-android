@@ -1,0 +1,72 @@
+
+su dung loai nay chi can tao 1 Customswiper va 1 xml.ko can phai tao 1 frag ment.
+public class Customswiper extends PagerAdapter {
+    private  int [] image_resources={R.drawable.abc,R.drawable.abc,R.drawable.abc,R.drawable.abc,R.drawable.abc,R.drawable.abc,R.drawable.abc};
+    private Context ctx;
+    private LayoutInflater layoutInflater;
+    public Customswiper(Context ctx){
+        this.ctx=ctx;
+    }
+
+    @Override
+    public int getCount() {
+        return image_resources.length;
+    }
+
+    @Override
+    public boolean isViewFromObject(View view, Object object) {
+        return (view==(LinearLayout)object);
+    }
+
+    @Override
+    public Object instantiateItem(ViewGroup container, int position) {
+
+        layoutInflater=(LayoutInflater)ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View item_view=layoutInflater.inflate(R.layout.swiper_layout,container,false);
+
+        ImageView imageView=(ImageView)item_view.findViewById(R.id.imageView);
+        TextView textView=(TextView)item_view.findViewById(R.id.textView);
+        imageView.setImageResource(image_resources[position]);
+        textView.setText("Image:" + position);
+        container.addView(item_view);
+
+
+        return item_view;
+    }
+
+    @Override
+    public void destroyItem(ViewGroup container, int position, Object object) {
+        container.removeView((LinearLayout)object );
+    }
+}
+ben main Activity
+ViewPager viewPager;
+    Customswiper adapter;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        viewPager=(ViewPager)findViewById(R.id.viewpager);
+        adapter=new Customswiper(this);
+        viewPager.setAdapter(adapter);
+        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
+            public void onPageSelected(int pageNumber) {day la ham su kien cua viewpager
+                // Just define a callback method in your fragment and call it like this!
+             
+                Toast.makeText(MainActivity.this,pageNumber+"",Toast.LENGTH_SHORT).show();
+
+            }
+
+            public void onPageScrolled(int arg0, float arg1, int arg2) {
+                // TODO Auto-generated method stub
+
+            }
+
+            public void onPageScrollStateChanged(int arg0) {
+                // TODO Auto-generated method stub
+
+            }
+        });
+    }

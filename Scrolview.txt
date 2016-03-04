@@ -1,0 +1,3 @@
+  ScrollView scrollView;
+scrollView=(ScrollView) findViewById(R.id.scrollView);
+ scrollView.smoothScrollTo(0, 0);

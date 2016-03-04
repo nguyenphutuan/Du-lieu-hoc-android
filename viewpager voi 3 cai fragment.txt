@@ -1,0 +1,33 @@
+public class Arrayadapter extends FragmentPagerAdapter {
+    List<Fragment> listFragment;
+    public Arrayadapter(FragmentManager fm,List<Fragment> listFragment) {
+        super(fm);
+        this.listFragment=listFragment;
+    }
+
+    @Override
+    public Fragment getItem(int position) {
+        return listFragment.get(position);
+    }
+
+    @Override
+    public int getCount() {
+        return listFragment.size();
+    }
+}
+
+ ViewPager viewPager;
+    Arrayadapter adapter;
+    List<Fragment> list=new ArrayList<Fragment>();
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        viewPager=(ViewPager)findViewById(R.id.view_pager);
+        list.add(new Fragment1());
+        list.add(new Fragment2());
+        list.add(new Fragment3());
+        adapter=new Arrayadapter(getSupportFragmentManager(),list);
+        viewPager.setAdapter(adapter);
+    }

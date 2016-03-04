@@ -1,0 +1,23 @@
+///////////////////////
+	ActionBar actionBar = getSupportActionBar();//hien nut back o tren;
+        actionBar.setDisplayHomeAsUpEnabled(true);
+ 	<activity android:name=".Main2Activity"
+            android:parentActivityName=".MainActivity">//them dong lenh nay vao manifesf
+
+        </activity>
+	hoc dung:getSupportActionBar().setDisplayHomeAsUpEnabled(true);(nhung van phai khai bao trog manifesf)
+		--->sau khi test neu ban chi su dung nut back thoi thi chi can kha bao o manifest cung dc roi.va
+		 actionBar.setDisplayHomeAsUpEnabled();luon mac dinh la true roi nen ko can phai co.
+		neu :actionBar.setDisplayHomeAsUpEnabled(true); thi no van hien nut back nhug neu ko khai bao manifesf thi ko co ich gi
+//////////////////
+ 	ActionBar mActionBar = getSupportActionBar();
+        mActionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#0000ff")));//set color cho action bar
+
+
+        LayoutInflater mInflater = LayoutInflater.from(this);//tu doan nay->
+        View mCustomView = mInflater.inflate(R.layout.action_bar, null);
+        TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.title_text);
+        mTitleTextView.setText("My Own Title");
+        ImageButton imageButton = (ImageButton) mCustomView.findViewById(R.id.imageButton);
+        mActionBar.setCustomView(mCustomView);
+        mActionBar.setDisplayShowCustomEnabled(true);//den het day->dung cho custom action bar

@@ -1,0 +1,92 @@
+package com.example.nguye.myapplication;
+
+import android.content.Context;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.HorizontalScrollView;
+import android.widget.TabHost;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener,TabHost.OnTabChangeListener{
+    ViewPager viewPager;
+    TabHost tabHost;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        initViewPager();
+        initTabHost();//ham cua taphost
+    }
+
+    private void initTabHost() {//thiet lap tap host
+        tabHost=(TabHost)findViewById(android.R.id.tabhost);
+        tabHost.setup();
+        String []tabName={"Tab1","Tab2","Tab3","Tab4","Tab5"};
+        for(int i=0;i<tabName.length;i++){
+            TabHost.TabSpec tabSpec;
+            tabSpec=tabHost.newTabSpec(tabName[i]);
+            tabSpec.setIndicator(tabName[i]);
+            tabSpec.setContent(new FakeContent(getApplicationContext()));
+            tabHost.addTab(tabSpec);
+        }
+        tabHost.setOnTabChangedListener(this);
+    }
+
+    public class FakeContent implements TabHost.TabContentFactory{
+        Context context;
+        public FakeContent(Context mcontext){
+            context=mcontext;
+        }
+        @Override
+        public View createTabContent(String tag) {
+            View fakeview=new View(context);
+            fakeview.setMinimumHeight(0);
+            fakeview.setMinimumWidth(0);
+            return fakeview;
+        }
+    }
+
+    private void initViewPager() {
+        viewPager=(ViewPager)findViewById(R.id.view_pager);//them cai phan tu fragmen vao voi taphos
+        List<Fragment> listFragment=new ArrayList<Fragment>();
+        listFragment.add(new Fragment1());
+        listFragment.add(new Fragment2());
+        listFragment.add(new Fragment3());
+        listFragment.add(new Fragment4());
+        listFragment.add(new Fragment5());
+        MyfragmentAdapter adapter=new MyfragmentAdapter(getSupportFragmentManager(),listFragment);
+        viewPager.setAdapter(adapter);
+        viewPager.setOnPageChangeListener(this);
+    }
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+    }
+
+    @Override
+    public void onPageSelected(int selectebItem) {
+        tabHost.setCurrentTab(selectebItem);
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
+    }
+
+    @Override
+    public void onTabChanged(String tabId) {//ham nay de can bang taphos voi fragment
+        int selectebItem=tabHost.getCurrentTab();
+        viewPager.setCurrentItem(selectebItem);
+        HorizontalScrollView horizontal=(HorizontalScrollView)findViewById(R.id.h_scroll_view);
+        View tabview=tabHost.getCurrentTabView();
+        int scrollpos=tabview.getLeft()-(horizontal.getWidth()-tabview.getWidth())/2;
+        horizontal.smoothScrollTo(scrollpos,0);
+    }
+
+}

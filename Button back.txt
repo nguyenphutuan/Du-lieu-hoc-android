@@ -1,0 +1,2 @@
+ActionBar actionBar = getSupportActionBar();
+actionBar.setDisplayHomeAsUpEnabled(true);

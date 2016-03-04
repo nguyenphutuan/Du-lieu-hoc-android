@@ -1,0 +1,57 @@
+ private class DocXML extends AsyncTask<String,Integer,String>{
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog= new ProgressDialog(MainActivity.this);
+            progressDialog.setIndeterminate(true);
+            progressDialog.setMessage("Loading...");
+            progressDialog.show();
+
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            return docNoiDung_Tu_URL(params[0]);
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            XMLDOMParser parser=new XMLDOMParser();
+
+            Document doc=parser.getDocument(s);
+            NodeList nodeList=doc.getElementsByTagName("item");
+            String kq="";
+//            for (int i=0;i<nodeList.getLength();i++){
+//                Element e=(Element)nodeList.item(i);
+//                kq =kq+parser.getValue(e,"title");
+//            }
+            Element e=(Element)nodeList.item(0);
+            kq =parser.getValue(e,"link");
+            TextView tv=(TextView)findViewById(R.id.textView);
+            tv.setText(kq);
+            progressDialog.dismiss();
+        }
+    }
+
+    private static String docNoiDung_Tu_URL(String theUrl)
+    {
+        StringBuilder content = new StringBuilder();
+        try
+        {
+            URL url = new URL(theUrl);
+            URLConnection urlConnection = url.openConnection();
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                content.append(line + "\n");
+            }
+            bufferedReader.close();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        return content.toString();
+    }

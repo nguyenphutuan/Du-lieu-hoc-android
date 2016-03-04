@@ -1,0 +1,35 @@
+GoogleMap map = ((MapFragment)getFragmentManager().findFragmentById(R.id.fragment)).getMap();
+
+        map.setMapType(GoogleMap.MAP_TYPE_NORMAL);// ki?u b?n d?
+        map.getUiSettings().setZoomControlsEnabled(true);//hien thi thanh cong cu zoom 
+        map.setMyLocationEnabled(true);//hien thi thanh cong cu. vi tri hien tai cua ban.
+
+        LatLng Home = new LatLng(20.974216, 106.239416);//vi tri khach
+
+        MarkerOptions option=new MarkerOptions();
+        option.position(Home);
+        option.title("Nhà C?a Tôi").snippet("This is happy");//ten vi tri va noi dung phu de ben duoi.
+        option.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN));//ki?u con tr? v? trí.
+        option.alpha(0.5f);//goc do.
+        option.rotation(20);//goc do
+        Marker maker = map.addMarker(option);
+        maker.showInfoWindow();
+
+        map.addCircle(new CircleOptions().center(Home).radius(1).fillColor(0x33FF66));//thêm 1 vòng tròn, d? l?n vòng tròn và màu bên trong vong tròn.(0x+ mã màu).
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(Home, 15));//muc do zoom c?a hình.
+
+        map.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {//ham su kien thong bao da load song.
+
+            @Override
+            public void onMapLoaded() {
+                Log.i("MAP LOADED", "END");
+            }
+        });
+        map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {//ham su kien khi ta bam vao dia diem.
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                Toast.makeText(MainActivity.this, "hello", Toast.LENGTH_SHORT).show();
+
+                return false;
+            }
+        });

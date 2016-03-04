@@ -1,0 +1,54 @@
+private GoogleMap mMap;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_maps);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+
+        // Add a marker in Sydney and move the camera
+
+        LatLng Home = new LatLng(20.974216, 106.239416);
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        mMap.setMyLocationEnabled(true);//hien thanh cong cu vi tri. khi su dung ham nay thi se phat sinh cai ì ben tren.
+        mMap.getUiSettings().setZoomControlsEnabled(true);//hien thanh cong cu zom
+        mMap.getUiSettings().setMapToolbarEnabled(true);//hien 2 thanh cong cu ben duoi goc phai de ta chuyn sang ung dung google map trong may.
+
+        MarkerOptions option = new MarkerOptions();
+        option.position(Home);
+        option.title("Nhà Cua Tôi").snippet("This is happy");//ten vi tri va noi dung phu de ben duoi.
+        option.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN));//ki?u con tr? v? trí.
+        option.alpha(0.5f);//goc do.
+        option.rotation(20);//goc do
+
+        Marker maker = mMap.addMarker(option);
+        maker.showInfoWindow();
+
+        mMap.addCircle(new CircleOptions().center(Home).radius(1).fillColor(0x33FF66));//thêm 1 vòng tròn, d? l?n vòng tròn và màu bên trong vong tròn.(0x+ mã màu).
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Home, 15));//muc do zoom cua maps.
+
+        
+        mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {//ham su kien thong bao da load song.
+
+            @Override
+            public void onMapLoaded() {
+                Log.i("MAP LOADED", "END");
+            }
+        });
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {//ham su kien khi ta bam vao dia diem.
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                Toast.makeText(MapsActivity. this, "hello", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
+    }
