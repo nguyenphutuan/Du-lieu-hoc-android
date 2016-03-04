@@ -1,0 +1,32 @@
+https://member2.hostbuddy.com/account/account_screen
+dataname: db_9e3672_tuank
+passwork: anhtuankieu
+
+sever url:MYSQL5013.HostBuddy.com
+username:9e3672_tuank
+
+tai khoan khac:
+mk: Anhtuan_1993
+
+
+https://www.youtube.com/watch?v=a7cbAqT63Jk
+https://www.youtube.com/watch?v=W-CrzLX976Y
+
+http://hocthietkeweb.net.vn/video-bai-giang/huong-dan-hoc-lap-trinh-mobile-app/page/8
+https://www.youtube.com/watch?v=M5DrK05Oa44            //fragment
+https://www.youtube.com/watch?v=GxEi_I3tv2k
+https://viblo.asia/le.van.ban/posts/jlA7GKJyMKZQ       //MediaRecorder lam ung dung ghi am quay video
+http://www.androidhub4you.com/2014/10/android-custom-shape-imageview-rounded.html //custom imageview
+https://www.youtube.com/watch?v=c9yC8XGaSv4//searchview voi listview(tim kiem)co ban
+https://www.youtube.com/watch?v=cC5vz9vIGy8//searchview voi listview(tim kiem)nang cao vi co custom listview
+tuoiga19931993@gmail.com
+toituoiga1993
+
+http://www.tutorialspoint.com/android/android_google_maps.htm//them thong tin de hoc
+https://developers.google.com/maps/documentation/android-api/location#my-location//danh cho google map
+http://www.androidhive.info/2015/05/android-swipe-down-to-refresh-listview-tutorial//swiper cong listview
+ useLibrary 'org.apache.http.legacy'
+https://www.youtube.com/watch?v=E_tRyVzKY2s
+http://www.truiton.com/2015/03/android-cardview-example/
+http://git-scm.com/book/vi/v1/B%E1%BA%AFt-%C4%90%E1%BA%A7u-S%C6%A1-L%C6%B0%E1%BB%A3c-L%E1%BB%8Bch-S%E1%BB%AD-c%E1%BB%A7a-Git
+
