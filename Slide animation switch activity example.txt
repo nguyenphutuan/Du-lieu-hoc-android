@@ -1,0 +1,81 @@
+buoc 1: ta create 2 main activity;
+main 1:
+Button btn=(Button)findViewById(R.id.button);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(MainActivity.this,Main2Activity.class);
+                startActivity(i);
+                overridePendingTransition(R.anim.slide_in_right,R.anim.sile_out_left);
+            }
+        });
+main2:
+ Button btn=(Button)findViewById(R.id.button2);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                overridePendingTransition(R.anim.slide_in_left, R.anim.sile_out_right);
+            }
+        });
+
+sau do vao res tao 1 android resource directer la anim:
+trong anim tao 4 layout:
+->>>
+slide_in_right.xml://////////////////////////////////////////////////////
+<set
+    android:shareInterpolator="false"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <translate android:duration="500" android:fromXDelta="100%" android:toXDelta="0%"
+        />
+    <alpha
+        android:duration="500" android:fromAlpha="0.0" android:toAlpha="1.0"
+        />
+
+</set>
+sile_out_left.xml://///////////////////////////////////////////////////////////////
+<set
+    android:shareInterpolator="false"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <translate android:duration="500"
+        android:fromXDelta="0%"
+        android:toXDelta="-100%"
+        />
+    <alpha
+        android:duration="500"
+        android:fromAlpha="1.0"
+        android:toAlpha="0.0"
+        />
+
+</set>
+
+slide_in_left.xml://////////////////////////////////////
+<set
+    android:shareInterpolator="false"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <translate android:duration="500"
+        android:fromXDelta="-100%"
+        android:toXDelta="0%"
+        />
+    <alpha
+        android:duration="500"
+        android:fromAlpha="0.0"
+        android:toAlpha="1.0"
+        />
+
+</set>
+sile_out_right.xml:///////////////
+<set
+    android:shareInterpolator="false"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <translate android:duration="500"
+        android:fromXDelta="0%"
+        android:toXDelta="100%"
+        />
+    <alpha
+        android:duration="500"
+        android:fromAlpha="1.0"
+        android:toAlpha="0.0"
+        />
+
+</set>

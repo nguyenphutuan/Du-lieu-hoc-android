@@ -32,7 +32,7 @@ $ git pull(dung de cap nhat cac thay doi tren git hub)
 
 -> noi tom tat lai khi vao du an: khi thay doi du lieu nhu la them 1 cai button ta dung lenh status de kiem tra ->
  dung lenh git add + ten file(co mau do tren status) ->git commit -m "loi chu i" -> pull ve de dong bo voi moi nguoi-> git push len git hub
-chu i 2: dung git add * (de them toan bo) ke ca them hay sua xoa ta cung phai add* roi commit 
+chu i 2: dung git add * (de them toan bo) ke ca them hay sua xoa ta cung phai add* roi commit )
 chu i 3: su dung commit chi la tram trung chuyen giua file tren may tinh la trang github vi vay sau commit thi ta phai push len
 chu i 4: khi ta tat may di ngu? khi khoi dong lai ta chi can lenh 
 $ cd Desktop/Example111/ la dc 

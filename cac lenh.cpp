@@ -6,6 +6,13 @@ arrayList.add(chuoi);//them mot phan tu vao danh sach va hien len listView
 arrayAdapter.notifyDataSetChanged();/reset lai danh sach
 sau khi xoa trang cac dittext thi ta su dung  editMa.requestFocus();de dua con tro ve
 
+  android:divider="#df3434"color for gach dong listview
+android:dividerHeight="10dp" lhoang cach giua cac dong voi nhau
+android:scrollbars="none"
+
+ android:layout_alignParentBottom="true" co dinh voi vien man hinh hay ko
+ android:layout_alignParentLeft="true"
+
  android:textAllCaps="false"//dung de viet text cho button(co the viet ch? to nh? du?c)
   android:textColor="#ff3300"//mau cua chu~;
 android:visibility="invisible"//trong suot mot view
@@ -58,21 +65,7 @@ android:layout_alignParentBottom="true"//an theo canh duoi man hinh
  <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>//xin phep de doc file trong thiet bi
  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>//xin phep dc viet va luu trong thiet bi
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:orientation="horizontal"
-    android:layout_height="match_parent"
-    android:baselineAligned="false">//day la lenh de co the chia muc do kich co~.(co 2 phan tu fragment)
-    <fragment
-        android:id = "@+id/article_fragment"
-        android:layout_weight = "2"//cai nay de nhan duoc 2 phan
-        android:layout_width = "match_parent"
-        android:layout_height = "match_parent"  />
-   <fragment
-       android:id = "@+id/headlines_fragment"
-       android:layout_weight = "1"//cai nay de nhan duoc 1 phan
-       android:layout_width = "match_parent"
-       android:layout_height = "match_parent" />
+
    
 </LinearLayout>
 /// cach dung su kien button don gian hon.

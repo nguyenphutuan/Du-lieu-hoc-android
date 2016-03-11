@@ -1,0 +1,21 @@
+
+        adapter = new customlistview(this,R.layout.customlist,list);
+        Collections.sort(list, new Comparator() {  //(list chinh la cai List<Sinhvienexample> list=new ArrayList<Sinhvienexample>();)
+
+            public int compare(Object o1, Object o2) {
+                Sinhvienexample p1 = (Sinhvienexample) o1;
+                Sinhvienexample p2 = (Sinhvienexample) o2;
+                return p1.getTen().compareToIgnoreCase(p2.getTen());
+            }
+
+        });
+        lv.setAdapter(adapter);
+
+sort binh thuong: kieu string;
+adapter.sort(new Comparator<String>() {
+    @Override
+    public int compare(String lhs, String rhs) {
+        return lhs.compareTo(rhs);   //or whatever your sorting algorithm
+    }
+});
+	

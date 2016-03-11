@@ -1,3 +1,14 @@
   ScrollView scrollView;
 scrollView=(ScrollView) findViewById(R.id.scrollView);
  scrollView.smoothScrollTo(0, 0);
+///////////////////////////////////////////
+TextView tv = (TextView) findViewById(R.id.textView);
+        tv.setMovementMethod(new ScrollingMovementMethod());
+<TextView
+    android:id="@+id/tv_long"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:scrollbars = "vertical"//them lenh nay nua
+    android:text="@string/really_long_string" >
+</TextView>
+/////////////////////////
